@@ -71,7 +71,7 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	char msg[1000];
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -107,23 +107,37 @@ int main(void)
   while (1)
   {
 	  if ((HAL_GetTick() - Timer) > 1000) {
+
+		  	  sprintf(msg, "--New Readings--\n");
+			  HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+
 	  			GNSS_GetUniqID(&GNSS_Handle);
 	  			GNSS_ParseBuffer(&GNSS_Handle);
 	  			HAL_Delay(250);
 	  			GNSS_GetPVTData(&GNSS_Handle);
 	  			GNSS_ParseBuffer(&GNSS_Handle);
-	  			printf("Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
-	  			printf("Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
-	  			printf("Status of fix: %d \r\n", GNSS_Handle.fixType);
-	  			printf("Latitude: %f \r\n", GNSS_Handle.fLat);
-	  			printf("Longitude: %f \r\n",(float) GNSS_Handle.lon / 10000000.0);
-	  			printf("Height above ellipsoid: %d \r\n", GNSS_Handle.height);
-	  			printf("Height above mean sea level: %d \r\n", GNSS_Handle.hMSL);
-	  			printf("Ground Speed (2-D): %d \r\n", GNSS_Handle.gSpeed);
-	  			printf("Unique ID: %04X %04X %04X %04X %04X \n\r",
+
+	  			sprintf(msg, "Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Time: %d:%d:%d \r\n", GNSS_Handle.hour, GNSS_Handle.min,GNSS_Handle.sec);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Status of fix: %d \r\n", GNSS_Handle.fixType);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Latitude: %f \r\n", GNSS_Handle.fLat);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Longitude: %f \r\n",(float) GNSS_Handle.lon / 10000000.0);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Height above ellipsoid: %d \r\n", GNSS_Handle.height);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Height above mean sea level: %d \r\n", GNSS_Handle.hMSL);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Ground Speed (2-D): %d \r\n", GNSS_Handle.gSpeed);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+	  			sprintf(msg, "Unique ID: %04X %04X %04X %04X %04X \n\r",
 	  					GNSS_Handle.uniqueID[0], GNSS_Handle.uniqueID[1],
 	  					GNSS_Handle.uniqueID[2], GNSS_Handle.uniqueID[3],
 	  					GNSS_Handle.uniqueID[4], GNSS_Handle.uniqueID[5]);
+	  			 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
 	  			Timer = HAL_GetTick();
 	  		}
     /* USER CODE END WHILE */
