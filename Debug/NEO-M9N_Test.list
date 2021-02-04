@@ -2008,6 +2008,7 @@ int main(void)
 	  			GNSS_ParseBuffer(&GNSS_Handle);
  80012e0:	487e      	ldr	r0, [pc, #504]	; (80014dc <main+0x28c>)
  80012e2:	f7ff fcb1 	bl	8000c48 <GNSS_ParseBuffer>
+
 	  			sprintf(msg, "Day: %d-%d-%d \r\n", GNSS_Handle.day, GNSS_Handle.month,GNSS_Handle.year);
  80012e6:	4b7d      	ldr	r3, [pc, #500]	; (80014dc <main+0x28c>)
  80012e8:	f893 3071 	ldrb.w	r3, [r3, #113]	; 0x71
